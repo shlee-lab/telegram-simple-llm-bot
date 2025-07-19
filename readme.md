@@ -51,7 +51,7 @@ If you want to switch from Google Gemini to another LLM (e.g., for better perfor
 - Import the new library (e.g., `import openai`).
 - Add a new env variable in `.env` (e.g., `OPENAI_API_KEY=your_key`).
 - Replace the Gemini setup and `handle_message` logic:
-  ```python
+```python
   # Example for OpenAI
   openai.api_key = os.getenv('OPENAI_API_KEY')
   # In handle_message:
@@ -62,8 +62,8 @@ If you want to switch from Google Gemini to another LLM (e.g., for better perfor
   bot_reply = response['choices'][0]['message']['content']
 ```
 - Adjust for the specific API's response format.
-4. Test Thoroughly: Run locally, check rate limits, and ensure text-only responses.
-5. Costs and Limits: Free tiers vary—e.g., OpenAI has usage quotas; monitor to avoid charges.
+4. **Test Thoroughly**: Run locally, check rate limits, and ensure text-only responses.
+5. **Costs and Limits**: Free tiers vary—e.g., OpenAI has usage quotas; monitor to avoid charges.
 
 ## Contributing
 Feel free to fork and submit pull requests. Issues welcome for bugs or feature ideas.
