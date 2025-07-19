@@ -30,9 +30,11 @@ pip install -r requirements.txt
 ```
 TELEGRAM_TOKEN=your_telegram_bot_token
 GEMINI_API_KEY=your_gemini_api_key
+ALLOWED_USER_IDS=your_telegram_id
 ```
 - Get `TELEGRAM_TOKEN`: Use Telegram's @BotFather to create a new bot.
 - Get `GEMINI_API_KEY`: Sign up at Google AI Studio and generate an API key.
+- Get `ALLOWED_USER_IDS`: To prevent API uses from unknown users, check your Telegram ID (not Telegram handle, pure number) and paste it here. You can add more than one id.
 
 ## Usage
 1. Run the bot locally for testing:

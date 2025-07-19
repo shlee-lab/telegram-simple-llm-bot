@@ -15,6 +15,10 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
+# Retrieve allowed user IDs from .env (comma-separated string, e.g., "123456789,987654321")
+allowed_ids_str = os.getenv('ALLOWED_USER_IDS', '')  # Default to empty if not set
+ALLOWED_USER_IDS = [int(uid.strip()) for uid in allowed_ids_str.split(',') if uid.strip()]  # Convert to list of ints
+
 # Configure Gemini API
 genai.configure(api_key=GEMINI_API_KEY)
 
@@ -29,6 +33,10 @@ async def start(update: Update, context: CallbackContext) -> None:
 # Handler for text messages (non-commands)
 async def handle_message(update: Update, context: CallbackContext) -> None:
     """Process user message and generate response using Gemini."""
+    user_id = update.message.from_user.id
+    if ALLOWED_USER_IDS and user_id not in ALLOWED_USER_IDS:  # Check if whitelist is set and user not allowed
+        await update.message.reply_text("Sorry, you are not authorized to use this bot.")
+        return
     user_message = update.message.text
     # Call Gemini to generate content
     response = model.generate_content(user_message)
